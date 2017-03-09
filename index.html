@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+    <button type="button" name="button" id="my-button">Stuur</button>
+
+    <h1 id="number" style="font-size: 80px;"></h1>
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+
+      // connect to websocket
+      // var socket = io.connect("http://localhost:3000");
+      var socket = io();
+
+      // event handler for incoming messages
+      socket.on("server up number", function (number) {
+        $('#number').html(number)
+      });
+
+      // sending message
+      $("#my-button").click(function(event) {
+        socket.emit("client up number");
+      });
+
+    </script>
+  </body>
+</html>
